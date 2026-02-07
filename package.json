@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "npm run --workspaces build",
-    "typecheck": "npm run --workspaces typecheck"
+    "typecheck": "npm run --workspaces typecheck",
+    "test": "npm run --workspace packages/contracts build && npm run --workspace packages/domain build && node --test --experimental-specifier-resolution=node"
   }
 }
