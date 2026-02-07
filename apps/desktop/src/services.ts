@@ -8,7 +8,11 @@ import type {
   RepositoryState,
   StreamingToken
 } from "../../../packages/contracts/src";
-import { createInitialState, normalizeModels } from "../../../packages/domain/src";
+import {
+  createInitialState,
+  ensureRepositoryState,
+  normalizeModels
+} from "../../../packages/domain/src";
 
 const STORAGE_KEY = "llm-desktop-state-v1";
 
@@ -49,7 +53,7 @@ export class LocalChatRepository implements IChatRepository {
     }
 
     try {
-      return JSON.parse(raw) as RepositoryState;
+      return ensureRepositoryState(JSON.parse(raw) as RepositoryState);
     } catch {
       const seed = createInitialState();
       await this.save(seed);
